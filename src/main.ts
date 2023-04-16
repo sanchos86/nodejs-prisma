@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+
 import { container } from './inversify/inversify.config';
 import { TYPES } from './inversify/types';
 import type { App } from './app';
