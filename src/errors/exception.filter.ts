@@ -9,17 +9,16 @@ import type { IExceptionFilter } from './interfaces/exception.filter.interface';
 @injectable()
 export class ExceptionFilter implements IExceptionFilter {
   constructor(
-    @inject<ILoggerService>(TYPES.ILoggerService)
-    public loggerService: ILoggerService,
+    @inject<ILoggerService>(TYPES.ILoggerService) public loggerService: ILoggerService,
   ) {
     this.bindThis();
   }
 
   bindThis() {
-    this.catch.bind(this);
+    this.catch = this.catch.bind(this);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars,class-methods-use-this
   catch(e: Error | HttpError, req: Request, res: Response, next: NextFunction) {
     if (e instanceof HttpError) {
       const message = `[${e.context}] Error ${e.statusCode}: ${e.message}`;
